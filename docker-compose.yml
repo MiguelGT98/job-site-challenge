@@ -11,6 +11,8 @@ services:
     command: npm start
     volumes:
       - ./client:/usr/src/app
+    depends_on:
+      - server
   server:
     container_name: backend
     build: ./server
@@ -19,15 +21,26 @@ services:
     stdin_open: true
     environment:
       - NODE_ENV=development
+      - DB_PORT=3306
+      - DB_HOST=database
+      - DB_USER=root
+      - DB_PASSWORD=.c.6"#?{L}cTr~P(
+      - DB_NAME=challenge
     command: nodemon index.js
     volumes:
       - ./server:/usr/src/app
+    depends_on:
+      - db
+    links:
+      - "db:database"
   db:
     container_name: database
     image: mysql:5.7
+    command: --init-file /data/application/init.sql
     ports:
       - 3306:3306
     volumes:
       - ./mysql-data:/var/lib/mysql
+      - ./init.sql:/data/application/init.sql
     environment:
       - MYSQL_ROOT_PASSWORD=.c.6"#?{L}cTr~P(
