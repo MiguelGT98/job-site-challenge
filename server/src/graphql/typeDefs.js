@@ -11,7 +11,7 @@ const typeDefs = gql`
     title: String
     description: String
     postedAt: Date
-    applied: Boolean
+    applicantCount: Int
   }
 
   scalar Date

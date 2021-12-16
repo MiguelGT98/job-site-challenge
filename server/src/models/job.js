@@ -6,14 +6,14 @@ class Job {
   title;
   description;
   postedAt;
-  applied;
+  applicantCount;
 
-  constructor(id, title, description, postedAt) {
+  constructor(id, title, description, postedAt, applicantCount) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.postedAt = new Date(postedAt);
-    this.applied = false;
+    this.applicantCount = applicantCount;
   }
 
   static create(jobData) {
@@ -25,23 +25,43 @@ class Job {
   }
 
   static getAll() {
-    return knex("jobs")
-      .select()
-      .then((jobs) => {
-        return jobs.map(
-          (job) => new Job(job.id, job.title, job.description, job.created_at)
-        );
-      });
+    return knex("jobs AS j")
+      .leftJoin("applications AS a", "j.id", "=", "a.job_id")
+      .select(["j.id", "j.description", "j.title", "j.created_at"])
+      .groupBy(["j.id", "j.description", "j.title", "j.created_at"])
+      .count("a.id", { as: "applicant_count" })
+      .then((jobs) =>
+        jobs.map(
+          (job) =>
+            new Job(
+              job.id,
+              job.title,
+              job.description,
+              job.created_at,
+              job.applicant_count
+            )
+        )
+      );
   }
 
   static get(id) {
-    return knex("jobs")
-      .where({ id })
+    return knex("jobs as j")
+      .where("j.id", "=", id)
+      .leftJoin("applications AS a", "j.id", "=", "a.job_id")
+      .select(["j.id", "j.description", "j.title", "j.created_at"])
+      .groupBy(["j.id", "j.description", "j.title", "j.created_at"])
+      .count("a.id", { as: "applicant_count" })
       .then((jobs) => {
         if (jobs.length === 0) return null;
 
         const job = jobs[0];
-        return new Job(job.id, job.title, job.description, job.created_at);
+        return new Job(
+          job.id,
+          job.title,
+          job.description,
+          job.created_at,
+          job.applicant_count
+        );
       });
   }
 
