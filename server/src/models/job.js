@@ -16,14 +16,15 @@ class Job {
     this.applicantCount = applicantCount;
   }
 
+  // Create a new job and insert it into the database.
   static create(jobData) {
-    const newJob = new Job();
-    newJob.title = jobData.title;
-    newJob.description = jobData.description;
+    const newJob = new Job(uuidv4(), jobData.title, jobData.description);
 
     return newJob.insert();
   }
 
+  // Retrieve all jobs from the database with their applicantCount
+  // Returns an array of job instances
   static getAll() {
     return knex("jobs AS j")
       .leftJoin("applications AS a", "j.id", "=", "a.job_id")
@@ -44,6 +45,8 @@ class Job {
       );
   }
 
+  // Retrieve a job with the given id from the database with it's applicantCount
+  // Returns a job instance
   static get(id) {
     return knex("jobs as j")
       .where("j.id", "=", id)
@@ -65,10 +68,12 @@ class Job {
       });
   }
 
+  // Insert a job object into the database
+  // Return true if job was inserted and false if it was not
   insert() {
     return knex("jobs")
       .insert({
-        id: uuidv4(),
+        id: this.id,
         title: this.title,
         description: this.description,
         created_at: new Date().toISOString().slice(0, 19).replace("T", " "),
@@ -82,8 +87,6 @@ class Job {
         return false;
       });
   }
-
-  delete() {}
 }
 
 module.exports = Job;

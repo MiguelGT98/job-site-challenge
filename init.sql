@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS challenge;
 
 CREATE TABLE `users` (
     `id` char(36) NOT NULL,
-    `email` varchar(255) DEFAULT NULL,
+    `email` varchar(255) UNIQUE NOT NULL,
     `name` varchar(255) DEFAULT NULL,
     `password` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`)
