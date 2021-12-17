@@ -47,6 +47,7 @@ const typeDefs = gql`
   type SignupResponse {
     success: Boolean
     message: String
+    token: Token
   }
 
   input SignupData {

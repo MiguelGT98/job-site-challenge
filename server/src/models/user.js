@@ -85,11 +85,18 @@ class User {
       })
       .then((response) => {
         console.log(response);
-        return true;
+
+        // Create a jwt for the user
+        const token = jwt.sign(
+          { email: this.email, name: this.name },
+          process.env.SECRET
+        );
+
+        return token;
       })
       .catch((e) => {
         console.error("Error:", e);
-        return false;
+        return null;
       });
   }
 }

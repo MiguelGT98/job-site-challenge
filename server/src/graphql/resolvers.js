@@ -52,13 +52,15 @@ const userResolvers = {
     signup: async (_, args) => {
       const { signupData } = args;
 
-      const inserted = await User.create(signupData);
+      const token = await User.create(signupData);
 
       return {
-        success: inserted,
-        message: inserted
-          ? "Created user succesfully"
-          : "An error happened creating the user",
+        success: token !== null,
+        token,
+        message:
+          token !== null
+            ? "Created user succesfully"
+            : "An error happened creating the user",
       };
     },
   },
