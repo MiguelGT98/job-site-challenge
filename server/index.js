@@ -13,9 +13,13 @@ const startServer = async () => {
     cors: true,
   });
 
-  expressApp.listen(4000, () => {
-    console.log("Server ready at http://localhost:4000");
-    console.log("Graphql Server ready at http://localhost:4000/graphql");
+  expressApp.listen(process.env.PORT || 4000, () => {
+    console.log(`Server ready at http://localhost:${process.env.PORT || 4000}`);
+    console.log(
+      `Graphql Server ready at http://localhost:${
+        process.env.PORT || 4000
+      }/graphql`
+    );
   });
 };
 
