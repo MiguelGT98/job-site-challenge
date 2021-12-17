@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a job portal web application made with React, Node, Graphql and Mysql
+This is a job portal web application made with React, Node, Graphql and Mysql. I chose to use Apollo Client and Apollo Server to implement my Graphql API since they're the tools I'm most familiar with in the Graphql ecosystem.
 
 ## Try it out!
 
