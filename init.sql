@@ -11,7 +11,7 @@ CREATE TABLE `users` (
 CREATE TABLE `jobs` (
     `id` char(36) NOT NULL,
     `title` varchar(255) DEFAULT NULL,
-    `description` varchar(255) DEFAULT NULL,
+    `description` text DEFAULT NULL,
     `created_at` datetime DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;

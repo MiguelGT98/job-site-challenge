@@ -8,6 +8,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - NODE_ENV=development
+      - REACT_APP_GRAPHQL_API_ENDPOINT=http://localhost:4000/graphql
     command: npm start
     volumes:
       - ./client:/usr/src/app
