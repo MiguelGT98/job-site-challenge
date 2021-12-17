@@ -38,7 +38,7 @@ class User {
     let user;
 
     return knex("users")
-      .select(["email", "name", "password"])
+      .select(["id", "email", "name", "password"])
       .where("email", userData.email)
       .then((users) => {
         if (users.length === 0) return null;
@@ -54,7 +54,7 @@ class User {
 
         // Create a jwt for the user
         const token = jwt.sign(
-          { email: user.email, name: user.name },
+          { id: user.id, email: user.email, name: user.name },
           process.env.SECRET
         );
 
@@ -67,8 +67,10 @@ class User {
   static validate(token) {
     try {
       const decoded = jwt.verify(token, process.env.SECRET);
+      console.log(decoded);
       return decoded;
-    } catch (err) {
+    } catch (e) {
+      console.error("Error:", e);
       return null;
     }
   }
@@ -88,7 +90,7 @@ class User {
 
         // Create a jwt for the user
         const token = jwt.sign(
-          { email: this.email, name: this.name },
+          { id: this.id, email: this.email, name: this.name },
           process.env.SECRET
         );
 

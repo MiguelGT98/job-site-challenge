@@ -63,6 +63,27 @@ const userResolvers = {
             : "An error happened creating the user",
       };
     },
+    applyToJob: async (_, args) => {
+      const { application } = args;
+
+      const user = await User.validate(application.token);
+
+      if (!user) {
+        return {
+          success: false,
+          message: "Token not valid",
+        };
+      }
+
+      const applied = await Job.apply(application.id, user.id);
+
+      return {
+        success: applied,
+        message: applied
+          ? "Applied succesfully"
+          : "An error happened while applying",
+      };
+    },
   },
 };
 

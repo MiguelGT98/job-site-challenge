@@ -34,10 +34,8 @@ const typeDefs = gql`
   type LoginResponse {
     success: Boolean
     message: String
-    token: Token
+    token: String
   }
-
-  scalar Token
 
   input LoginData {
     email: String
@@ -47,13 +45,23 @@ const typeDefs = gql`
   type SignupResponse {
     success: Boolean
     message: String
-    token: Token
+    token: String
   }
 
   input SignupData {
     name: String
     email: String
     password: String
+  }
+
+  input ApplicationData {
+    id: String
+    token: String
+  }
+
+  type ApplyToJobResponse {
+    success: Boolean
+    message: String
   }
 
   # Queries and mutations for both models
@@ -66,6 +74,7 @@ const typeDefs = gql`
     login(loginData: LoginData): LoginResponse
     signup(signupData: SignupData): SignupResponse
     createJob(job: JobData): CreateJobResponse
+    applyToJob(application: ApplicationData): ApplyToJobResponse
   }
 `;
 

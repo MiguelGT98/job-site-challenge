@@ -17,7 +17,7 @@ CREATE TABLE `jobs` (
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 
 CREATE TABLE `applications` (
-    `id` char(36) NOT NULL,
+    `id` char(73) NOT NULL,
     `job_id` char(36) NOT NULL,
     `user_id` char(36) NOT NULL,
     PRIMARY KEY (`id`),

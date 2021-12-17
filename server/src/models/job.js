@@ -68,6 +68,25 @@ class Job {
       });
   }
 
+  // Inserts an application into the database
+  // Returns true if it happened, false if it didn't
+  static apply(jobId, userId) {
+    return knex("applications")
+      .insert({
+        id: `${jobId}-${userId}`,
+        job_id: jobId,
+        user_id: userId,
+      })
+      .then((response) => {
+        console.log(response);
+        return true;
+      })
+      .catch((e) => {
+        console.error("Error:", e);
+        return false;
+      });
+  }
+
   // Insert a job object into the database
   // Return the id if job was inserted and null if it was not
   insert() {

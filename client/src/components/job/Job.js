@@ -8,7 +8,8 @@ const Job = ({ title, applicantCount, description, id }) => {
         {title}
         <p className="text-left font-light mt-1 mb-4 text-gray-600 text-base">
           <span className="text-gray-800 font-bold">{applicantCount}</span>{" "}
-          people have applied to this job
+          {applicantCount === 1 ? "person has" : "people have"} applied to this
+          job
         </p>
       </h1>
       <hr className="my-4 text-gray-500"></hr>

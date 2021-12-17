@@ -33,4 +33,13 @@ const CREATE_JOB = gql`
   }
 `;
 
-export { GET_JOBS_PREVIEW, GET_JOB, CREATE_JOB };
+const APPLY_TO_JOB = gql`
+  mutation ApplyToJob($application: ApplicationData) {
+    applyToJob(application: $application) {
+      success
+      message
+    }
+  }
+`;
+
+export { GET_JOBS_PREVIEW, GET_JOB, CREATE_JOB, APPLY_TO_JOB };
