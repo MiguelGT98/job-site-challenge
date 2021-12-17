@@ -26,8 +26,6 @@ const SignupForm = () => {
   };
 
   if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
-  if (data && data.signup && !data.signup.success) return data.signup.message;
   if (data && data.signup && data.signup.success) {
     setAuthToken(data.signup.token);
 
@@ -90,6 +88,10 @@ const SignupForm = () => {
         >
           Sign up
         </button>
+      </div>
+      <div className="text-center">
+        {error ? `Submission error! ${error.message}` : ""}
+        {data && data.login && !data.login.success ? data.login.message : ""}
       </div>
     </form>
   );

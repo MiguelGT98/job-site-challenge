@@ -22,8 +22,6 @@ const SigninForm = () => {
   };
 
   if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
-  if (data && data.login && !data.login.success) return data.login.message;
   if (data && data.login && data.login.success) {
     setAuthToken(data.login.token);
 
@@ -69,6 +67,10 @@ const SigninForm = () => {
         >
           Sign in
         </button>
+      </div>
+      <div className="text-center text-red-500">
+        {error ? `Submission error! ${error.message}` : ""}
+        {data && data.login && !data.login.success ? data.login.message : ""}
       </div>
     </form>
   );

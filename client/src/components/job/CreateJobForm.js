@@ -21,9 +21,7 @@ const CreateJobForm = () => {
   };
 
   if (loading) return "Submitting...";
-  if (error) return `Submission error! ${error.message}`;
   if (data && data.createJob && data.createJob.success) {
-    console.log(data.createJob);
     return <Navigate to={`/jobs/${data.createJob.id}`} />;
   }
 
@@ -64,6 +62,12 @@ const CreateJobForm = () => {
         >
           Post your job!
         </button>
+      </div>
+      <div className="text-center text-red-500">
+        {error ? `Submission error! ${error.message}` : ""}
+        {data && data.createJob && !data.createJob.success
+          ? data.createJob.message
+          : ""}
       </div>
     </form>
   );
