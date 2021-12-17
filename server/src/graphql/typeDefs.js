@@ -19,16 +19,8 @@ const typeDefs = gql`
 
   type CreateJobResponse {
     success: Boolean
+    id: String
     message: String
-  }
-
-  type Query {
-    jobs: [Job]
-    job(id: String!): Job
-  }
-
-  type Mutation {
-    createJob(job: JobData): CreateJobResponse
   }
 
   # User definitions
@@ -63,9 +55,16 @@ const typeDefs = gql`
     password: String
   }
 
+  # Queries and mutations for both models
+  type Query {
+    jobs: [Job]
+    job(id: String!): Job
+  }
+
   type Mutation {
     login(loginData: LoginData): LoginResponse
     signup(signupData: SignupData): SignupResponse
+    createJob(job: JobData): CreateJobResponse
   }
 `;
 

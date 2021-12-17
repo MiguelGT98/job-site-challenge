@@ -69,7 +69,7 @@ class Job {
   }
 
   // Insert a job object into the database
-  // Return true if job was inserted and false if it was not
+  // Return the id if job was inserted and null if it was not
   insert() {
     return knex("jobs")
       .insert({
@@ -80,11 +80,11 @@ class Job {
       })
       .then((response) => {
         console.log(response);
-        return true;
+        return this.id;
       })
       .catch((e) => {
         console.error("Error:", e);
-        return false;
+        return null;
       });
   }
 }

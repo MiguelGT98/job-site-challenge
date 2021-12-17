@@ -3,7 +3,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Job from "../components/job/Job";
 import Layout from "../components/layout/Layout";
-import { GET_JOB } from "../queries/jobs";
+import { GET_JOB } from "../graphql/jobs";
 
 const JobPage = () => {
   // Get id using params from react router

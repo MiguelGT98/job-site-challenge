@@ -23,4 +23,14 @@ const GET_JOB = gql`
   }
 `;
 
-export { GET_JOBS_PREVIEW, GET_JOB };
+const CREATE_JOB = gql`
+  mutation CreateJob($job: JobData!) {
+    createJob(job: $job) {
+      success
+      message
+      id
+    }
+  }
+`;
+
+export { GET_JOBS_PREVIEW, GET_JOB, CREATE_JOB };

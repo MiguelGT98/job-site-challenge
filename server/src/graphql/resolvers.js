@@ -22,13 +22,15 @@ const jobResolvers = {
     createJob: async (_, args) => {
       const { job } = args;
 
-      const inserted = await Job.create(job);
+      const insertedId = await Job.create(job);
 
       return {
-        success: inserted,
-        message: inserted
-          ? "Created job succesfully"
-          : "An error happened creating the job",
+        success: insertedId !== null,
+        message:
+          insertedId !== null
+            ? "Created job succesfully"
+            : "An error happened creating the job",
+        id: insertedId,
       };
     },
   },
@@ -62,6 +64,9 @@ const userResolvers = {
   },
 };
 
-resolvers = { ...jobResolvers, ...userResolvers };
+const resolvers = {
+  Query: { ...jobResolvers.Query, ...userResolvers.Query },
+  Mutation: { ...jobResolvers.Mutation, ...userResolvers.Mutation },
+};
 
 module.exports = resolvers;
