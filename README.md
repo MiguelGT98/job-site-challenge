@@ -4,6 +4,8 @@
 
 This is a job portal web application made with React, Node, Graphql and Mysql. I chose to use Apollo Client and Apollo Server to implement my Graphql API since they're the tools I'm most familiar with in the Graphql ecosystem.
 
+![Demo of the app](./demo.gif)
+
 ## Try it out!
 
 You can try the app online [https://stupefied-saha-b5a090.netlify.app/](https://stupefied-saha-b5a090.netlify.app/) or just follow the installation steps for local development.
