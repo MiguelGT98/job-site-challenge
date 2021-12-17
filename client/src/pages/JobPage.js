@@ -12,6 +12,7 @@ const JobPage = () => {
   // Fetch for the specific job data
   const { loading, error, data } = useQuery(GET_JOB, {
     variables: { id },
+    pollInterval: 3000,
   });
 
   if (loading) return <p>Loading...</p>;

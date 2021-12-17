@@ -7,6 +7,7 @@ import { GET_JOBS_PREVIEW } from "../../graphql/jobs";
 const JobList = () => {
   const { loading, error, data } = useQuery(GET_JOBS_PREVIEW, {
     fetchPolicy: "no-cache",
+    pollInterval: 3000,
   });
 
   if (loading) return <p>Loading...</p>;
